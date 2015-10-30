@@ -1,3 +1,4 @@
+/* global Phaser */
 (function() {
 	'use strict';
 
