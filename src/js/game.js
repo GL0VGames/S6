@@ -32,7 +32,6 @@
 		},
 
 		update: function () {
-
 			if (cursors.left.isDown && player.y === walkingPlayerY)
 				player.x -= 5;
 			else if (cursors.right.isDown && player.y === walkingPlayerY)
