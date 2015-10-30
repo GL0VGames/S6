@@ -4,41 +4,46 @@
   function Game() {}
   
   var player;
-  var platforms;
+  var floor;
+  var wall;
+  var floorLine;
+  var playerY;
   var cursors;
 
   Game.prototype = {
     create: function () {
       this.input.onDown.add(this.onInputDown, this);
+      floorLine = this.game.height - 128;
+      playerY = floorLine + 32;
       
-      player = this.game.add.sprite(100, 200, 'player');
-
-      this.game.physics.arcade.enable(player);
+      player = this.game.add.sprite(0, playerY, 'player');
   
-      player.body.collideWorldBounds = true;
-      player.body.gravity.y = 500;
-  
-      platforms = this.game.add.physicsGroup();
-  
-      platforms.create(0, 256, 'platform').scale.setTo(0.75, 0.75);
-      platforms.create(96, 256, 'platform').scale.setTo(0.75, 0.75);
-      platforms.create(256, 128, 'platform').scale.setTo(0.75, 0.75);
-  
-      platforms.setAll('body.immovable', true);
-  
+      wall = this.game.add.sprite(0, floorLine - 128, 'wall');
+      wall.moveDown();
+      
+      floor = this.game.add.sprite(0, floorLine, 'floor');
+      floor.moveDown();
+      
+      this.input.keyboard.addKey(Phaser.Keyboard.UP);
       cursors = this.game.input.keyboard.createCursorKeys();
-
     },
 
-    update: function () {
-      this.game.physics.arcade.collide(player, platforms);
-
-      player.body.velocity.x = 0;
-  
+    update: function () { 
+      
       if (cursors.left.isDown)
-          player.body.velocity.x = -250;
+        player.x += -5;
       else if (cursors.right.isDown)
-          player.body.velocity.x = 250;
+        player.x += 5;
+      
+      this.game.input.keyboard.onDownCallback = function( e ){
+        if (e.keyCode == Phaser.Keyboard.UP) 
+          this.game.add.tween(player).to( { x: player.x, y: floorLine - player.height }, 500, "Cubic", true);
+      };
+      
+      this.game.input.keyboard.onUpCallback = function( e ){
+        if(e.keyCode == Phaser.Keyboard.UP)
+          this.game.add.tween(player).to( { x: player.x, y: playerY }, 500, "Cubic", true);
+      };
     },
 
     onInputDown: function () {
