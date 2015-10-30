@@ -30,19 +30,20 @@
 
 		update: function () {
 
-			if (cursors.left.isDown)
+			if (cursors.left.isDown) {
 				player.x += -5;
-			else if (cursors.right.isDown)
+			} else if (cursors.right.isDown) {
 				player.x += 5;
+			}
 
 			this.game.input.keyboard.onDownCallback = function( e ){
-				if (e.keyCode == Phaser.Keyboard.UP)
-					this.game.add.tween(player).to( { x: player.x, y: floorLine - player.height }, 500, "Cubic", true);
+				if (e.keyCode === Phaser.Keyboard.UP) {
+					this.game.add.tween(player).to( { x: player.x, y: floorLine - player.height }, 500, "Cubic", true); }
 			};
 
 			this.game.input.keyboard.onUpCallback = function( e ){
-				if(e.keyCode == Phaser.Keyboard.UP)
-					this.game.add.tween(player).to( { x: player.x, y: playerY }, 500, "Cubic", true);
+				if(e.keyCode === Phaser.Keyboard.UP) {
+					this.game.add.tween(player).to( { x: player.x, y: playerY }, 500, "Cubic", true); }
 			};
 		},
 
