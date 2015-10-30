@@ -29,6 +29,17 @@
 
 			this.game.load.image('wall', 'kenny/Tiles/fence_stone.png')
 			this.game.load.image('floor', 'backgrounds/floor.png');
+			
+			this.game.load.image('eyes1', 'face elements/normal eyes.png');
+			this.game.load.image('ears1', 'face elements/white ears.png');
+			this.game.load.image('face1', 'face elements/facebase black.png');
+			this.game.load.image('face2', 'face elements/facebase brown.png');
+			this.game.load.image('face3', 'face elements/facebase tan.png');
+			this.game.load.image('face4', 'face elements/facebase white.png');
+			this.game.load.image('hairB1', 'face elements/brn boy short back.png');
+			this.game.load.image('hairF1', 'face elements/brn boy short fore.png');
+			this.game.load.image('mouth1', 'face elements/normal mouth.png');
+			this.game.load.image('nose1', 'face elements/normal nose.png');
 		},
 
 		create: function () {
