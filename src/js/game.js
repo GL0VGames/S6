@@ -14,30 +14,46 @@
 	var faceLoc;
 	var face;
 
-	
+	// var theatres = {
+	// 	_: [],
+	// 	x: null,
+	// 	y: null,
+	// 	create: function(x, y, context) {
+	// 		this.x = x;
+	// 		this.y = y;
+	// 		this._[0] = context.game.add.sprite(this.x, this.y, 'wall');
+	// 		this._[1] = context.game.add.sprite(this.x, this.y, 'screen');
+	// 		this._[2] = context.game.add.sprite(this.x, this.y, 'well');
+	// 	},
+	// 	move: function (dir) {
+	// 		for(var i = 0; i < this._.length; i++)
+	// 			this._[i].x += 5;
+	// 	}
+	// }
 
 	Game.prototype = {
 		create: function () {
+			this.game.world.setBounds(0, 0, 2172, 600);
 			this.input.onDown.add(this.onInputDown, this);
 			
-			floor = this.game.add.sprite(0, this.game.height - 128, 'floor');
-			floor.moveDown();
+			floor = this.game.add.physicsGroup();
+			for (var i = 0; i < 2172; i += 1024)
+				floor.create(i, this.game.height - 128, 'floor');
 			
 			floorLine = this.game.height - floor.height;
-			hidingPlayerY = floorLine;
+			hidingPlayerY = floorLine - 20;
 			walkingPlayerY = floorLine + floor.height / 2;
 			faceLoc = {x: this.game.width / 2, y: this.game.height / 2};
-
 
 			wall = this.game.add.physicsGroup();
 			wall.create(0, floorLine - 128, 'wall');
 			wall.create(0, floorLine - 128, 'wall');
 			wall.setAll('body.immovable', true);
-
 			
 			player = this.game.add.sprite(100, walkingPlayerY, 'player')
-			player.anchor.set(0.5, 1);
+			player.anchor.set(0.5, 0.5);
 			this.game.physics.arcade.enable(player);
+			this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
 
 			face = this.game.add.physicsGroup();
 			face.create(faceLoc.x, faceLoc.y, 'hairB1').scale.setTo(.2,.2);
