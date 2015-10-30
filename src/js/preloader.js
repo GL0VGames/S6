@@ -26,8 +26,9 @@
 
 			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');
 			this.game.load.image('platform', 'kenny/Tiles/brick_red.png');
+			this.game.load.image('well', 'backgrounds/well.png');
 
-			this.game.load.image('wall', 'kenny/Tiles/fence_stone.png')
+			this.game.load.image('wall', 'kenny/Tiles/fence_stone.png');
 			this.game.load.image('floor', 'backgrounds/floor.png');
 			
 			this.game.load.image('eyes1', 'face elements/normal eyes.png');
