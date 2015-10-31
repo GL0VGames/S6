@@ -8,10 +8,7 @@
 		init: function(wl) {
 			winlose = wl;
 		},
-		create: function () {
-			var buttonStart = this.game.add.button(this.game.world.width - 136, this.game.world.height - 70, 'restart', this.startOnClick, this, 2, 1, 0);
-			buttonStart.anchor.set(0.5);
-			
+		create: function () {			
 			var style = { font: "bold 64px Calibri", fill: "#fff", align: "center" };
 			var text = "You " + winlose + "!"
 			var title = this.game.add.text(512, 300, text, style);
@@ -19,13 +16,16 @@
 			if (winlose === "win")
 				title.addColor("#4CFF4C", 0);
 			else title.addColor("#FF4C4C", 0);
+
+			var buttonLose = this.game.add.button(888, 530, 'restart', this.startOnClick, this, 2, 1, 0);
+			buttonLose.anchor.set(0.5);
 		},
 		update: function () {
 	
 		},
 		
 		startOnClick: function () {
-			this.game.state.start('mark');
+			this.game.state.start('credits');
 		},
 	};
 

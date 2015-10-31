@@ -25,8 +25,8 @@
 			this.game.load.crossOrigin = 'anonymous';
 
 			// ----- Menu -----
-			this.game.load.image('ruby', 'kenny/Tiles/greystone_ruby.png');
-			this.game.load.image('bricks', 'kenny/Tiles/brick_red.png');
+			this.game.load.image('credits', 'Credits button.png');
+			this.game.load.image('start', 'StartButton.png');
 			
 			// ----- Mark -----
 			this.game.load.image('ready', "ready button.png");
@@ -50,6 +50,9 @@
 			// ----- Actors -----
 			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');
 			this.game.load.image('enemy', 'Mr Boo.png');
+			
+			// ----- Credits -----
+			this.game.load.image('creditPage', 'Credits Page.png');
 
 			// ----- Face Stuff -----
 			// Popup

@@ -10,6 +10,7 @@ window.addEventListener('load', function () {
 	game.state.add('mark', ns.Mark);
 	game.state.add('game', ns.Game);
 	game.state.add('winLose', ns.WinLose);
+	game.state.add('credits', ns.Credits);
 	/* yo phaser:state new-state-files-put-here */
 	game.state.start('boot');
 }, false);

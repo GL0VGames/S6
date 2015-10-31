@@ -209,7 +209,7 @@
 					var context = this;
 					function seen() {
 						context.game.paused = false;
-						context.game.state.start('winLose', true, false, "were seen");
+						context.game.state.start('winLose', false, false, "were seen");
 					}
 					this.game.paused = true;
 					window.setTimeout(seen, 1000);
@@ -250,14 +250,14 @@
 					if (hidingPlayerTheatre !== markLoc) {
 						theatres.theatres[hidingPlayerTheatre].face.tint = 0xff4c4c;
 						function lose() {
-							that.game.state.start('winLose', true, false, "lose");
+							that.game.state.start('winLose', false, false, "lose");
 						}
 						window.setTimeout(lose, 2500);
 					}
 					else {
 						theatres.theatres[hidingPlayerTheatre].face.tint = 0x4cff4c;
 						function win() {
-							that.game.state.start('winLose', true, false, "win");
+							that.game.state.start('winLose', false, false, "win");
 						}
 						window.setTimeout(win, 2500);
 					}

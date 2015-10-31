@@ -7,13 +7,13 @@
 		create: function () {
 			var buttonStart = this.game.add.button(this.game.world.centerX - 128,
 											  this.game.world.centerY + 128,
-											  'bricks',
+											  'start',
 											  this.startOnClick,
 											  this,
 											  2, 1, 0);
 			var buttonCredits = this.game.add.button(this.game.world.centerX + 128,
 											  this.game.world.centerY + 128,
-											  'ruby',
+											  'credits',
 											  this.actionOnClick,
 											  this,
 											  2, 1, 0);
@@ -51,6 +51,9 @@
 
 		startOnClick: function () {
 			this.game.state.start('mark');
+		},
+		actionOnClick: function () {
+			this.game.state.start('credits');
 		},
 
 	};
