@@ -66,7 +66,7 @@
 	
 	Mark.prototype = {
 		create: function () {
-			var buttonStart = this.game.add.button(this.game.world.width - 100, this.game.world.height - 70, 'ready', this.startOnClick, this, 2, 1, 0);
+			var buttonStart = this.game.add.button(924, 530, 'ready', this.startOnClick, this, 2, 1, 0);
 			buttonStart.anchor.set(0.5);
 			
 			var titleStyle = { font: "bold 64px Calibri", fill: "#fff", align: "center" };
@@ -80,10 +80,10 @@
 							  "Their mouth curls in a(n) " + descriptions["mouth" + playerMark[6]][Math.round(Math.random())] + " way.  " + 
 							  "They have " + descriptions["front" + playerMark[3]][Math.round(Math.random())] + " hair on top " + 
 							  "and " + descriptions["back" + playerMark[0]][Math.round(Math.random())] + " hair in back.  " + 
-							  "Your target has a " + descriptions["face" + playerMark[2]][Math.round(Math.random())] + " face " + 
+							  "Your target has a(n) " + descriptions["face" + playerMark[2]][Math.round(Math.random())] + " face " + 
 							  "and " + descriptions["ears" + playerMark[1]][Math.round(Math.random())] + " ears.  " +
 							  "Good luck!";
-			var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, description, descriptionStyle);
+			var text = this.game.add.text(512, 300, description, descriptionStyle);
 			text.anchor.set(0.5);
 		},
 		update: function () {

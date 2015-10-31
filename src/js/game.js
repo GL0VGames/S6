@@ -118,9 +118,9 @@
 		init: function(mark) {
 			playerMark = mark;
 			markLoc = Math.floor(Math.random() * TOTAL_THEATRES);
-			console.log("mark in:" + markLoc);
 		},
 		create: function () {
+			currentTheatrePosX = 0;
 			this.game.world.setBounds(0, 0, worldWidth, 600);
 			
 			floorLine = this.game.height - 128;
@@ -141,7 +141,7 @@
 			this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
 			
 			for (var i = 0; i < TOTAL_ENEMIES; i++) {
-				var locX = Math.floor(Math.random() * (worldWidth - 450)) + 300;
+				var locX = Math.floor(Math.random() * (worldWidth - 1100)) + 600;
 				enemies[i] = {
 					e: this.game.add.sprite(locX, walkingPlayerY, 'enemy'),
 					dir: (Math.round(Math.random()) === 0) ? actorDir.left : actorDir.right,
@@ -209,7 +209,7 @@
 					var context = this;
 					function seen() {
 						context.game.paused = false;
-						context.game.state.start('winLose', false, false, "were seen");
+						context.game.state.start('winLose', true, false, "were seen");
 					}
 					this.game.paused = true;
 					window.setTimeout(seen, 1000);
@@ -250,14 +250,14 @@
 					if (hidingPlayerTheatre !== markLoc) {
 						theatres.theatres[hidingPlayerTheatre].face.tint = 0xff4c4c;
 						function lose() {
-							that.game.state.start('winLose', false, false, "lose");
+							that.game.state.start('winLose', true, false, "lose");
 						}
 						window.setTimeout(lose, 2500);
 					}
 					else {
 						theatres.theatres[hidingPlayerTheatre].face.tint = 0x4cff4c;
 						function win() {
-							that.game.state.start('winLose', false, false, "win");
+							that.game.state.start('winLose', true, false, "win");
 						}
 						window.setTimeout(win, 2500);
 					}

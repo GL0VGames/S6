@@ -25,7 +25,7 @@
 		},
 		
 		startOnClick: function () {
-			this.game.state.start('menu');
+			this.game.state.start('credits');
 		},
 	};
 

@@ -33,6 +33,9 @@
 			
 			// ----- WinLose -----
 			this.game.load.image("restart", "restart button.png");
+			
+			// ----- Credits -----
+			this.game.load.image("back", "BackButton.png");
 
 			// ----- Background -----
 			this.game.load.image('well', 'backgrounds/well.png');
