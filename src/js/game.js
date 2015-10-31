@@ -121,9 +121,10 @@
 		},
 		create: function () {
 			currentTheatrePosX = 0;
+			playerState = "walking";
 			this.game.world.setBounds(0, 0, worldWidth, 600);
 			
-			floorLine = this.game.height - 128;
+			floorLine = 472;
 			hidingPlayerY = floorLine - 20;
 			walkingPlayerY = floorLine + 40;
 			
