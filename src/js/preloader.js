@@ -30,7 +30,8 @@
 			this.game.load.image('well', 'backgrounds/well.png');
 			this.game.load.image('screen', 'backgrounds/screen.png');
 
-			this.game.load.image('wall', 'backgrounds/wall.png');
+			this.game.load.image('lwall', 'backgrounds/lower wall.png');
+			this.game.load.image('uwall', 'backgrounds/upper wall.png');
 			this.game.load.image('floor', 'backgrounds/floor.png');
 			
 			// ----- Smoke -----
