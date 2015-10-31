@@ -206,7 +206,7 @@
 					
 				var min = player.x + (player.width * currPlayerDir) / 2 > (enemies[i].e.x - (enemies[i].e.width * enemies[i].dir) / 2);
 				var max = player.x - (player.width * currPlayerDir) / 2 < (enemies[i].e.x - (enemies[i].e.width * enemies[i].dir) / 2);
-				if ((min && max) && playerState !== "hiding") {
+				if ((min && max) && playerState !== "hiding" && playerState !== "smoking") {
 					var context = this;
 					function seen() {
 						context.game.paused = false;
