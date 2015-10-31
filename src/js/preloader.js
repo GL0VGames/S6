@@ -32,6 +32,10 @@
 			this.game.load.image('wall', 'backgrounds/wall.png');
 			this.game.load.image('floor', 'backgrounds/floor.png');
 			
+			this.game.load.image('smoke1', 'effects/smoke 1.png');
+			this.game.load.image('smoke2', 'effects/smoke 2.png');
+			this.game.load.image('smoke3', 'effects/smoke 3.png');
+			
 			this.game.load.image('eyes1', 'face elements/normal eyes.png');
 			this.game.load.image('ears1', 'face elements/white ears.png');
 			this.game.load.image('face1', 'face elements/facebase black.png');
