@@ -50,7 +50,7 @@
 		},
 
 		startOnClick: function () {
-			this.game.state.start('game');
+			this.game.state.start('mark');
 		},
 
 	};

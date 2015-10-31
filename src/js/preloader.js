@@ -27,6 +27,12 @@
 			// ----- Menu -----
 			this.game.load.image('ruby', 'kenny/Tiles/greystone_ruby.png');
 			this.game.load.image('bricks', 'kenny/Tiles/brick_red.png');
+			
+			// ----- Mark -----
+			this.game.load.image('ready', "ready button.png");
+			
+			// ----- WinLose -----
+			this.game.load.image("restart", "restart button.png");
 
 			// ----- Background -----
 			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');

@@ -16,6 +16,8 @@
 	var walkingPlayerY;
 	var cursors;
 	var throwKey;
+	var playerMark;
+	var markLoc;
 	
 	var TheatreParts = {LWALL: 0, UWALL: 1, WELL: 2, SCREEN: 3};
 	
@@ -91,11 +93,30 @@
 			faceGroup.anchor.set(.5, 1);
 			faceGroup.scale.set(.25);
 			return faceGroup;
+		},
+		fromArr(arr, x, y, context) {
+			var faceGroup = context.game.add.sprite(x, y, 'popup');
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'back' + arr[0]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'ears' + arr[1]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'face' + arr[2]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'front' + arr[3]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'eyes' + arr[4]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'nose' + arr[5]));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'mouth' + arr[6]));
+			faceGroup.visible = false;
+			faceGroup.anchor.set(.5, 1);
+			faceGroup.scale.set(.25);
+			return faceGroup;
 		}
 	}
 	
 
 	Game.prototype = {
+		init: function(mark) {
+			playerMark = mark;
+			markLoc = Math.floor(Math.random() * TOTAL_THEATRES);
+			console.log("mark in:" + markLoc);
+		},
 		create: function () {
 			this.game.world.setBounds(0, 0, worldWidth, 600);
 			
@@ -124,7 +145,14 @@
 				theatres.theatres[i].em.maxParticleScale = .3;
 				theatres.theatres[i].em.particleBringToTop = false;
 				
-				theatres.theatres[i].face = FaceManager.create((i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 300, this)
+				if (i === markLoc) {
+					theatres.theatres[i].face = FaceManager.fromArr(playerMark, (i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 300, this);
+					theatres.theatres[i].face.visible = false;
+					theatres.theatres[i].face.anchor.set(.5, 1);
+					theatres.theatres[i].face.scale.set(.25);
+				}
+				else
+					theatres.theatres[i].face = FaceManager.create((i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 300, this);
 			}
 
 			this.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -162,8 +190,22 @@
 			else if (playerState === "hiding") {
 				player.tint = 0x747474;
 				if (throwKey.isDown && playerState === "hiding") {
-					//theatres.theatres[hidingPlayerTheatre].em.
 					theatres.theatres[hidingPlayerTheatre].em.start(false, 5000, 20);
+					var that = this;
+					if (hidingPlayerTheatre !== markLoc) {
+						theatres.theatres[hidingPlayerTheatre].face.tint = 0xff4c4c;
+						function lose() {
+							that.game.state.start('winLose', true, false, "lose");
+						}
+						window.setTimeout(lose, 2500);
+					}
+					else {
+						theatres.theatres[hidingPlayerTheatre].face.tint = 0x4cff4c;
+						function win() {
+							that.game.state.start('winLose', true, false, "win");
+						}
+						window.setTimeout(win, 2500);
+					}
 					playerState = "smoking";
 				}
 				theatres.theatres[hidingPlayerTheatre].face.visible = true;
