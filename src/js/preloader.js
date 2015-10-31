@@ -35,7 +35,6 @@
 			this.game.load.image("restart", "restart button.png");
 
 			// ----- Background -----
-			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');
 			this.game.load.image('well', 'backgrounds/well.png');
 			this.game.load.image('screen', 'backgrounds/screen.png');
 
@@ -47,6 +46,10 @@
 			this.game.load.image('smoke1', 'effects/smoke 1.png');
 			this.game.load.image('smoke2', 'effects/smoke 2.png');
 			this.game.load.image('smoke3', 'effects/smoke 3.png');
+
+			// ----- Actors -----
+			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');
+			this.game.load.image('enemy', 'Mr Boo.png');
 
 			// ----- Face Stuff -----
 			// Popup

@@ -16,9 +16,9 @@
 			var text = "You " + winlose + "!"
 			var title = this.game.add.text(512, 300, text, style);
 			title.anchor.set(0.5);
-			if (winlose === "lose")
-				title.addColor("#FF4C4C", 0);
-			else title.addColor("#4CFF4C", 0);
+			if (winlose === "win")
+				title.addColor("#4CFF4C", 0);
+			else title.addColor("#FF4C4C", 0);
 		},
 		update: function () {
 	

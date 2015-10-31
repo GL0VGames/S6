@@ -6,8 +6,8 @@
 
 	var player;
 	var playerState = "walking";
-	var playerDir = {left: 1, right: -1};
-	var currPlayerDir = playerDir.left;
+	var actorDir = {left: 1, right: -1};
+	var currPlayerDir = actorDir.left;
 	var hidingPlayerTheatre = 0;
 	var floor;
 	var theatres;
@@ -18,6 +18,7 @@
 	var throwKey;
 	var playerMark;
 	var markLoc;
+	var enemies = [];
 	
 	var TheatreParts = {LWALL: 0, UWALL: 1, WELL: 2, SCREEN: 3};
 	
@@ -25,6 +26,8 @@
 	var MOVEMENT_SPEED = 5;
 	var TOTAL_THEATRES = 6;
 	var THEATRE_WIDTH = 474;
+	var TOTAL_ENEMIES = Math.round(TOTAL_THEATRES / 3);
+	var ENEMY_RANGE = 500;
 	var MAX_FACE = 3;
 	var MAX_ENMH = 5;
 	var worldWidth = TOTAL_THEATRES * THEATRE_WIDTH;
@@ -131,11 +134,27 @@
 				floor.create(i, floorLine, 'floor');
 			floor.setAll('tint', 0xd0d0d0);
 			
-			player = this.game.add.sprite(100, walkingPlayerY, 'player')
+			player = this.game.add.sprite(100, walkingPlayerY, 'player');
 			player.anchor.set(0.5, 0.5);
 			this.game.physics.arcade.enable(player);
 			player.body.collideWorldBounds = true;
 			this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
+			
+			for (var i = 0; i < TOTAL_ENEMIES; i++) {
+				var locX = Math.floor(Math.random() * (worldWidth - 450)) + 300;
+				enemies[i] = {
+					e: this.game.add.sprite(locX, walkingPlayerY, 'enemy'),
+					dir: (Math.round(Math.random()) === 0) ? actorDir.left : actorDir.right,
+					startX: locX,
+					max: locX + ENEMY_RANGE,
+					min: locX - ENEMY_RANGE,
+					speed: MOVEMENT_SPEED - 4
+				};
+				enemies[i].e.anchor.set(0.5, 0.5);
+				enemies[i].e.scale.set(.25);
+				this.game.physics.arcade.enable(enemies[i].e);
+				enemies[i].e.body.collideWorldBounds = true;
+			}
 			
 			for (var i = 0; i < TOTAL_THEATRES; i++) {
 				theatres.theatres[i].em = this.game.add.emitter((i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 200, 200);
@@ -160,7 +179,43 @@
 			throwKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		},
 
-		update: function () {			
+		update: function () {	
+			
+			for (var i = 0; i < TOTAL_ENEMIES; i++) {
+				if (enemies[i].e.x >= enemies[i].max || enemies[i].e.x <= enemies[i].min) {
+					if (enemies[i].e.x >= enemies[i].max) {
+						enemies[i].dir = actorDir.left;
+						enemies[i].e.x -= enemies[i].speed;
+					}
+					else if (enemies[i].e.x <= enemies[i].min) {
+						enemies[i].dir = actorDir.right;
+						enemies[i].e.x += enemies[i].speed;
+					}
+				}
+				else
+					if (enemies[i].dir == actorDir.right)
+						enemies[i].e.x += enemies[i].speed;
+					else if (enemies[i].dir == actorDir.left) {
+						enemies[i].e.x -= enemies[i].speed;
+					}
+				if (enemies[i].dir == actorDir.right)
+					enemies[i].e.scale.x = -.25;
+				else
+					enemies[i].e.scale.x = .25;
+					
+				var min = player.x + (player.width * currPlayerDir) / 2 > (enemies[i].e.x - (enemies[i].e.width * enemies[i].dir) / 2);
+				var max = player.x - (player.width * currPlayerDir) / 2 < (enemies[i].e.x - (enemies[i].e.width * enemies[i].dir) / 2);
+				if ((min && max) && playerState !== "hiding") {
+					var context = this;
+					function seen() {
+						context.game.paused = false;
+						context.game.state.start('winLose', true, false, "were seen");
+					}
+					this.game.paused = true;
+					window.setTimeout(seen, 1000);
+				}
+			}
+					
 			if (playerState === "walking") {
 				var wells = theatres.getParts(TheatreParts.WELL);
 				
@@ -177,12 +232,12 @@
 				if (cursors.left.isDown && player.y === walkingPlayerY) {
 					player.x -= MOVEMENT_SPEED;
 					player.scale.x = 1;
-					currPlayerDir = playerDir.left;
+					currPlayerDir = actorDir.left;
 				}
 				else if (cursors.right.isDown && player.y === walkingPlayerY) {
 					player.x += MOVEMENT_SPEED;
 					player.scale.x = -1;
-					currPlayerDir = playerDir.right;
+					currPlayerDir = actorDir.right;
 				}
 				
 				player.tint = 0xffffff;
