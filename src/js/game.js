@@ -23,8 +23,8 @@
 	var MOVEMENT_SPEED = 5;
 	var TOTAL_THEATRES = 6;
 	var THEATRE_WIDTH = 474;
-	var MAX_FACE = 1;
-	var MAX_ALL_ELSE = 1;
+	var MAX_FACE = 3;
+	var MAX_ENMH = 5;
 	var worldWidth = TOTAL_THEATRES * THEATRE_WIDTH;
 	var currentTheatrePosX = 0;
 
@@ -80,13 +80,13 @@
 			var baseColor = Math.floor(Math.random() * MAX_FACE);
 			var faceGroup = context.game.add.sprite(x, y, 'popup');
 			
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'back' + Math.floor(Math.random() * MAX_ALL_ELSE)));
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'ears' + baseColor));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'back' + Math.floor(Math.random() * MAX_ENMH)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'ears' + baseColor + Math.round(Math.random())));
 			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'face' + baseColor));
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'front' + Math.floor(Math.random() * MAX_ALL_ELSE)));
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'eyes' + Math.floor(Math.random() * MAX_ALL_ELSE)));
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'nose' + Math.floor(Math.random() * MAX_ALL_ELSE)));
-			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'mouth' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'front' + Math.floor(Math.random() * MAX_ENMH)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'eyes' + Math.floor(Math.random() * MAX_ENMH)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'nose' + Math.floor(Math.random() * MAX_ENMH)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'mouth' + Math.floor(Math.random() * MAX_ENMH)));
 			faceGroup.visible = false;
 			faceGroup.anchor.set(.5, 1);
 			faceGroup.scale.set(.25);

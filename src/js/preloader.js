@@ -72,15 +72,32 @@
 
 			// Front hair
 			this.game.load.image('front0', 'face elements/normal hair fore.png');
+			this.game.load.image('front1', 'face elements/black girl fore.png');
+			this.game.load.image('front2', 'face elements/prim hair fore.png');
+			this.game.load.image('front3', 'face elements/boy black hair fore.png');
+			this.game.load.image('front4', 'face elements/boybrown curly hair fore.png');
+			this.game.load.image('front5', 'face elements/spiky blond boy.png');
 
 			// Back hair
 			this.game.load.image('back0', 'face elements/girl hair back.png');
+			this.game.load.image('back1', 'face elements/black girl back.png');
+			this.game.load.image('back2', 'face elements/prim girl hair back.png');
+			this.game.load.image('back3', 'face elements/boy back hair prim.png');
+			this.game.load.image('back4', 'face elements/boy back hair black.png');
+			this.game.load.image('back5', 'face elements/blonde boy back.png');
 
 			// Ears
-			this.game.load.image('ears0', 'face elements/white ears med.png');
+			this.game.load.image('ears00', 'face elements/white ears med.png');
+			this.game.load.image('ears01', 'face elements/white ears big.png');
+			this.game.load.image('ears10', 'face elements/brown ears med.png');
+			this.game.load.image('ears11', 'face elements/brown ears big.png');
+			this.game.load.image('ears20', 'face elements/tan ears med.png');
+			this.game.load.image('ears21', 'face elements/tan ears big.png');
 
 			// Face
 			this.game.load.image('face0', 'face elements/facebase white.png');
+			this.game.load.image('face1', 'face elements/facebase brown.png');
+			this.game.load.image('face2', 'face elements/facebase tan.png');
 		},
 
 		create: function () {
