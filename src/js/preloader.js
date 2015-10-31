@@ -67,14 +67,14 @@
 			this.game.load.image('mouth4', 'face elements/sad mouth.png');
 			this.game.load.image('mouth5', 'face elements/worried mouth.png');
 			
-			// Ears
-			this.game.load.image('ears0', 'face elements/white ears med.png');
-			
 			// Front hair
 			this.game.load.image('front0', 'face elements/normal hair fore.png');
 			
 			// Back hair
 			this.game.load.image('back0', 'face elements/girl hair back.png');
+			
+			// Ears
+			this.game.load.image('ears0', 'face elements/white ears med.png');
 			
 			// Face
 			this.game.load.image('face0', 'face elements/facebase white.png');
