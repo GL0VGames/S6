@@ -50,8 +50,6 @@
 			var x = currentTheatrePosX + THEATRE_WIDTH / 2;
 			var ret = {
 				_: [context.game.add.sprite(currentTheatrePosX, y, 'lwall'), context.game.add.sprite(currentTheatrePosX, y, 'uwall'), context.game.add.sprite(x, y, 'well'), context.game.add.sprite(currentTheatrePosX, y, 'screen')],
-				em: context.game.add.emitter(currentTheatrePosX + THEATRE_WIDTH / 2, 200, 100),
-				face: FaceManager.create(currentTheatrePosX + THEATRE_WIDTH / 2, 300, context)
 			}
 			this.setup(ret, context);
 			return ret;
@@ -74,11 +72,6 @@
 			// Screen
 			obj._[3].scale.set(.5);
 			obj._[3].anchor.set(0, 1);
-			
-			// Particles
-			obj.em.makeParticles(['smoke1', 'smoke2', 'smoke3']);
-			obj.em.minParticleScale = .3;
-			obj.em.maxParticleScale = .3;
 		}
 	}
 	
@@ -120,7 +113,19 @@
 			player = this.game.add.sprite(100, walkingPlayerY, 'player')
 			player.anchor.set(0.5, 0.5);
 			this.game.physics.arcade.enable(player);
+			player.body.collideWorldBounds = true;
 			this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN);
+			
+			for (var i = 0; i < TOTAL_THEATRES; i++) {
+				theatres.theatres[i].em = this.game.add.emitter((i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 200, 200);
+				// Particle settings
+				theatres.theatres[i].em.makeParticles(['smoke1', 'smoke2', 'smoke3']);
+				theatres.theatres[i].em.minParticleScale = .3;
+				theatres.theatres[i].em.maxParticleScale = .3;
+				theatres.theatres[i].em.particleBringToTop = false;
+				
+				theatres.theatres[i].face = FaceManager.create((i * THEATRE_WIDTH) + THEATRE_WIDTH / 2, 300, this)
+			}
 
 			this.input.keyboard.addKey(Phaser.Keyboard.UP);
 			cursors = this.game.input.keyboard.createCursorKeys();
@@ -157,6 +162,7 @@
 			else if (playerState === "hiding") {
 				player.tint = 0x747474;
 				if (throwKey.isDown && playerState === "hiding") {
+					//theatres.theatres[hidingPlayerTheatre].em.
 					theatres.theatres[hidingPlayerTheatre].em.start(false, 5000, 20);
 					playerState = "smoking";
 				}
@@ -179,10 +185,12 @@
 
 			this.game.input.keyboard.onUpCallback = function( e ){
 				if(e.keyCode === Phaser.Keyboard.UP) {
-					var tween = this.game.add.tween(player);
-					tween.to( { x: player.x, y: walkingPlayerY }, 100 * MOVEMENT_SPEED, "Cubic", true);
-					tween.onComplete.add(back2Walking, this);
-					playerState = "moving";
+					if (playerState !== "smoking") {
+						var tween = this.game.add.tween(player);
+						tween.to( { x: player.x, y: walkingPlayerY }, 125 * MOVEMENT_SPEED, "Cubic", true);
+						tween.onComplete.add(back2Walking, this);
+						playerState = "moving";
+					}
 				}
 			};
 		}
