@@ -83,14 +83,14 @@
 			
 			floorLine = this.game.height - 128;
 			hidingPlayerY = floorLine - 20;
-			walkingPlayerY = floorLine + 64;
+			walkingPlayerY = floorLine + 40;
 			faceLoc = {x: this.game.width / 2, y: this.game.height / 2};
 			
 			theatres = TheatreManager.create(floorLine, this);
 			
 			floor = this.game.add.physicsGroup();
 			for (var i = 0; i < worldWidth; i += 1024)
-				floor.create(i, this.game.height - 128, 'floor');
+				floor.create(i, floorLine, 'floor');
 			floor.setAll('tint', 0xd0d0d0);
 			
 			player = this.game.add.sprite(100, walkingPlayerY, 'player')
