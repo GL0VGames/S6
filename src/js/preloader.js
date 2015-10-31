@@ -21,7 +21,7 @@
 			// load your assets here
 			this.game.stage.backgroundColor = '#85b5e1';
 
-			this.game.load.baseURL = '/assets/';
+			this.game.load.baseURL = './assets/';
 			this.game.load.crossOrigin = 'anonymous';
 
 			// ----- Menu -----

@@ -25,19 +25,28 @@ gulp.task('clean', function (cb) {
 	del([paths.dist], cb);
 });
 
-gulp.task('copy-assets', ['clean'], function () {
-	gulp.src(paths.assets)
+gulp.task('copy-assets', function () {
+	gulp.src("src/assets/**.png")
 		.pipe(gulp.dest(paths.dist + 'assets'))
+		.on('error', gutil.log);
+	gulp.src("src/assets/backgrounds/**.png")
+		.pipe(gulp.dest(paths.dist + 'assets/backgrounds'))
+		.on('error', gutil.log);
+	gulp.src("src/assets/face elements/**.png")
+		.pipe(gulp.dest(paths.dist + 'assets/face elements'))
+		.on('error', gutil.log);
+	gulp.src("src/assets/effects/**.png")
+		.pipe(gulp.dest(paths.dist + 'assets/effects'))
 		.on('error', gutil.log);
 });
 
-gulp.task('copy-vendor', ['clean'], function () {
+gulp.task('copy-vendor', function () {
 	gulp.src(paths.libs)
 		.pipe(gulp.dest(paths.dist))
 		.on('error', gutil.log);
 });
 
-gulp.task('uglify', ['clean','lint'], function () {
+gulp.task('uglify', function () {
 	gulp.src(paths.js)
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest(paths.dist))
@@ -45,7 +54,7 @@ gulp.task('uglify', ['clean','lint'], function () {
 		.pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('minifycss', ['clean'], function () {
+gulp.task('minifycss', function () {
 	gulp.src(paths.css)
 		.pipe(minifycss({
 		keepSpecialComments: false,
@@ -56,14 +65,14 @@ gulp.task('minifycss', ['clean'], function () {
 		.on('error', gutil.log);
 });
 
-gulp.task('processhtml', ['clean'], function() {
+gulp.task('processhtml', function() {
 	gulp.src('src/index.html')
 		.pipe(processhtml({}))
 		.pipe(gulp.dest(paths.dist))
 		.on('error', gutil.log);
 });
 
-gulp.task('minifyhtml', ['clean'], function() {
+gulp.task('minifyhtml', function() {
 	gulp.src('dist/index.html')
 		.pipe(minifyhtml())
 		.pipe(gulp.dest(paths.dist))
