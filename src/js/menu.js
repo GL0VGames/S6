@@ -5,14 +5,14 @@
 
 	Menu.prototype = {
 		create: function () {
-			var buttonStart = this.game.add.button(this.game.world.centerX - 128,
-											  this.game.world.centerY + 128,
+			var buttonStart = this.game.add.button(384,
+											  328,
 											  'start',
 											  this.startOnClick,
 											  this,
 											  2, 1, 0);
-			var buttonCredits = this.game.add.button(this.game.world.centerX + 128,
-											  this.game.world.centerY + 128,
+			var buttonCredits = this.game.add.button(384,
+											  328,
 											  'credits',
 											  this.actionOnClick,
 											  this,
@@ -21,8 +21,8 @@
 			buttonCredits.anchor.set(0.5);
 
 			var style = { font: "bold 64px Calibri", fill: "#fff", align: "center" };
-			var title = this.game.add.text(this.game.world.centerX,
-				this.game.world.centerY - 96,
+			var title = this.game.add.text(512,
+				204,
 				'SNEAKILY SLINGING\nSLIGHTLY SULFUROUS-SMELLING\nSMOKE\n(or S6, for short)',
 				style);
 
