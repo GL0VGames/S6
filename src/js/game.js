@@ -21,7 +21,7 @@
 	
 	// Global Vars
 	var MOVEMENT_SPEED = 5;
-	var TOTAL_THEATRES = 12;
+	var TOTAL_THEATRES = 6;
 	var THEATRE_WIDTH = 474;
 	var MAX_FACE = 1;
 	var MAX_ALL_ELSE = 1;
