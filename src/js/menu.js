@@ -6,13 +6,13 @@
 	Menu.prototype = {
 		create: function () {
 			var buttonStart = this.game.add.button(384,
-											  328,
+											  428,
 											  'start',
 											  this.startOnClick,
 											  this,
 											  2, 1, 0);
-			var buttonCredits = this.game.add.button(384,
-											  328,
+			var buttonCredits = this.game.add.button(640,
+											  428,
 											  'credits',
 											  this.actionOnClick,
 											  this,
