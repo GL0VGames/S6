@@ -40,6 +40,9 @@
 			this.game.load.image('smoke3', 'effects/smoke 3.png');
 			
 			// ----- Face Stuff -----
+			// Popup
+			this.game.load.image('popup', 'popup.png');
+			
 			// Eyes
 			this.game.load.image('eyes0', 'face elements/bored eyes.png');
 			this.game.load.image('eyes1', 'face elements/mad eyes.png');
