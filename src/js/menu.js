@@ -5,13 +5,43 @@
 
 	Menu.prototype = {
 		create: function () {
-			var button = this.game.add.button(this.game.world.centerX,
-											  this.game.world.centerY,
-											  'platform',
+			var buttonStart = this.game.add.button(this.game.world.centerX - 128,
+											  this.game.world.centerY + 128,
+											  'bricks',
+											  this.startOnClick,
+											  this,
+											  2, 1, 0);
+			var buttonCredits = this.game.add.button(this.game.world.centerX + 128,
+											  this.game.world.centerY + 128,
+											  'ruby',
 											  this.actionOnClick,
 											  this,
 											  2, 1, 0);
-			button.anchor.set(0.5);
+			buttonStart.anchor.set(0.5);
+			buttonCredits.anchor.set(0.5);
+
+			var style = { font: "bold 64px Calibri", fill: "#fff", align: "center" };
+			var title = this.game.add.text(this.game.world.centerX,
+				this.game.world.centerY - 96,
+				'SNEAKILY SLINGING\nSLIGHTLY SULFUROUS-SMELLING\nSMOKE\n(or S6, for short)',
+				style);
+
+			title.anchor.set(0.5);
+
+			title.addColor("#FF4C4C", 0);
+			title.addColor("#FFFFFF", 1);
+			title.addColor("#FF4C4C", 9);
+			title.addColor("#FFFFFF", 10);
+			title.addColor("#FF4C4C", 17);
+			title.addColor("#FFFFFF", 18);
+			title.addColor("#FF4C4C", 26);
+			title.addColor("#FFFFFF", 27);
+			title.addColor("#FF4C4C", 36);
+			title.addColor("#FFFFFF", 37);
+			title.addColor("#FF4C4C", 44);
+			title.addColor("#FFFFFF", 45);
+			title.addColor("#4C4CFF", 52);
+			title.addColor("#FFFFFF", 55);
 
 		},
 
@@ -19,7 +49,7 @@
 
 		},
 
-		actionOnClick: function () {
+		startOnClick: function () {
 			this.game.state.start('game');
 		},
 
