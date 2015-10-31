@@ -15,7 +15,6 @@
 	var hidingPlayerY;
 	var walkingPlayerY;
 	var cursors;
-	var faceLoc;
 	var throwKey;
 	
 	var TheatreParts = {LWALL: 0, UWALL: 1, WELL: 2, SCREEN: 3};
@@ -86,16 +85,18 @@
 	var FaceManager = {
 		create: function(x, y, context) {
 			var baseColor = Math.floor(Math.random() * MAX_FACE);
-			var faceGroup = context.game.add.physicsGroup();
-			faceGroup.create(x, y, 'back' + Math.floor(Math.random() * MAX_ALL_ELSE));
-			faceGroup.create(x, y, 'ears' + baseColor);
-			faceGroup.create(x, y, 'face' + baseColor);
-			faceGroup.create(x, y, 'front' + Math.floor(Math.random() * MAX_ALL_ELSE));
-			faceGroup.create(x, y, 'eyes' + Math.floor(Math.random() * MAX_ALL_ELSE));
-			faceGroup.create(x, y, 'nose' + Math.floor(Math.random() * MAX_ALL_ELSE));
-			faceGroup.create(x, y, 'mouth' + Math.floor(Math.random() * MAX_ALL_ELSE));
-			faceGroup.setAll('visible', false);
-			faceGroup.setAll('z', 99);
+			var faceGroup = context.game.add.sprite(x, y, 'popup');
+			
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'back' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'ears' + baseColor));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'face' + baseColor));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'front' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'eyes' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'nose' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.addChild(context.game.make.sprite(0 - faceGroup.width / 2, 0 - faceGroup.height - 100, 'mouth' + Math.floor(Math.random() * MAX_ALL_ELSE)));
+			faceGroup.visible = false;
+			faceGroup.anchor.set(.5, 1);
+			faceGroup.scale.set(.25);
 			return faceGroup;
 		}
 	}
@@ -159,7 +160,7 @@
 					theatres.theatres[hidingPlayerTheatre].em.start(false, 5000, 20);
 					playerState = "smoking";
 				}
-				theatres.theatres[hidingPlayerTheatre].face.setAll('visible', true);
+				theatres.theatres[hidingPlayerTheatre].face.visible = true;
 			}
 			else if (playerState === "moving") {
 				player.tint = 0xffffff;
@@ -173,6 +174,7 @@
 
 			function back2Walking() {
 				playerState = "walking";
+				theatres.theatres[hidingPlayerTheatre].face.visible = false;
 			}
 
 			this.game.input.keyboard.onUpCallback = function( e ){
