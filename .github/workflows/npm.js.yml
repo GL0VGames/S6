@@ -30,6 +30,7 @@ jobs:
         cache: 'npm'
     # Install and build the project
     - run: npm ci
+    - run: npm run post-install
     - run: npm run build --if-present
 
     # Create artifact and deploy
