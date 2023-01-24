@@ -25,7 +25,7 @@ gulp.task('clean', function (cb) {
 	del([paths.dist], cb);
 });
 
-gulp.task('copy-assets', function () {
+gulp.task('copy-assets', function (done) {
 	gulp.src("src/assets/**.png")
 		.pipe(gulp.dest(paths.dist + 'assets'))
 		.on('error', gutil.log);
@@ -38,24 +38,25 @@ gulp.task('copy-assets', function () {
 	gulp.src("src/assets/effects/**.png")
 		.pipe(gulp.dest(paths.dist + 'assets/effects'))
 		.on('error', gutil.log);
+	done();
 });
 
 gulp.task('copy-vendor', function () {
-	gulp.src(paths.libs)
+	return gulp.src(paths.libs)
 		.pipe(gulp.dest(paths.dist))
 		.on('error', gutil.log);
 });
 
 gulp.task('uglify', function () {
-	gulp.src(paths.js)
+	return gulp.src(paths.js)
 		.pipe(concat('main.min.js'))
 		.pipe(gulp.dest(paths.dist))
-		.pipe(uglify({outSourceMaps: false}))
+		.pipe(uglify())
 		.pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('minifycss', function () {
-	gulp.src(paths.css)
+	return gulp.src(paths.css)
 		.pipe(minifycss({
 		keepSpecialComments: false,
 		removeEmpty: true
@@ -66,33 +67,33 @@ gulp.task('minifycss', function () {
 });
 
 gulp.task('processhtml', function() {
-	gulp.src('src/index.html')
+	return gulp.src('src/index.html')
 		.pipe(processhtml({}))
 		.pipe(gulp.dest(paths.dist))
 		.on('error', gutil.log);
 });
 
 gulp.task('minifyhtml', function() {
-	gulp.src('dist/index.html')
+	return gulp.src('dist/index.html')
 		.pipe(minifyhtml())
 		.pipe(gulp.dest(paths.dist))
 		.on('error', gutil.log);
 });
 
 gulp.task('lint', function() {
-	gulp.src(paths.js)
+	return gulp.src(paths.js)
 		.pipe(jshint('.jshintrc'))
 		.pipe(jshint.reporter('default'))
 		.on('error', gutil.log);
 });
 
 gulp.task('html', function(){
-	gulp.src('src/*.html')
+	return gulp.src('src/*.html')
 		.pipe(connect.reload())
 		.on('error', gutil.log);
 });
 
-gulp.task('connect', function () {
+gulp.task('connect', function (done) {
 	connect.server({
 		root: [__dirname + '/src'],
 		port: 9000,
@@ -100,9 +101,10 @@ gulp.task('connect', function () {
 	});
 });
 
-gulp.task('watch', function () {
-	gulp.watch(['./src/index.html', paths.css, paths.js], ['html']);
+gulp.task('watch', function (done) {
+	gulp.watch(['./src/index.html', paths.css, ...paths.js], gulp.series('html'));
+	done();
 });
 
-gulp.task('default', ['connect', 'watch']);
-gulp.task('build', ['copy-assets', 'copy-vendor', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);
+gulp.task('default', gulp.series('connect', 'watch'));
+gulp.task('build', gulp.series('copy-assets', 'copy-vendor', 'uglify', 'minifycss', 'processhtml', 'minifyhtml'));

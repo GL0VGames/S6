@@ -8,20 +8,20 @@
 
 	"devDependencies": {
 		"bower": "*",
-		"gulp": "*",
+		"gulp": "4.0.2",
 		"gulp-util": "*",
-		"gulp-concat": "*",
-		"gulp-download": "*",
+		"gulp-concat": "2.6.1",
+		"gulp-download": "",
 		"gulp-rename": "*",
-		"gulp-minify-css": "*",
-		"gulp-minify-html": "*",
+		"gulp-minify-css": "1.2.4",
+		"gulp-minify-html": "1.0.6",
 		"gulp-processhtml": "*",
 		"gulp-jshint": "*",
-		"gulp-uglify": "*",
+		"gulp-uglify": "3.0.2",
 		"gulp-connect": "*",
 		"gulp-watch": "*",
 		"tiny-lr": "*",
-		"del": "*"
+		"del": "6.1.1"
 	},
 
 	"scripts": {
