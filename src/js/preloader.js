@@ -51,7 +51,7 @@
 			this.game.load.image('smoke3', 'effects/smoke 3.png');
 
 			// ----- Actors -----
-			this.game.load.image('player', 'kenny/Characters/Hedgehog/hedgehog_body.png');
+			this.game.load.image('player', 'hedgehog_body.png');
 			this.game.load.image('enemy', 'Mr Boo.png');
 			
 			// ----- Credits -----
