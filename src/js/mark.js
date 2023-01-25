@@ -82,8 +82,8 @@
 							  "and " + descriptions["back" + playerMark[0]][Math.round(Math.random())] + " hair in back.  " + 
 							  "Your target has a(n) " + descriptions["face" + playerMark[2]][Math.round(Math.random())] + " face " + 
 							  "and " + descriptions["ears" + playerMark[1]][Math.round(Math.random())] + " ears.  " +
-							  "Good luck!";
-			var text = this.game.add.text(512, 300, description, descriptionStyle);
+							  "Hide in theaters to avoid being seen by the guards. Good luck!";
+			var text = this.game.add.text(512, 320, description, descriptionStyle);
 			text.anchor.set(0.5);
 		},
 		update: function () {
